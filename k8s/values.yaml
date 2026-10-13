@@ -1,4 +1,4 @@
 replicas: 1
 image: <+artifact.image>
 featureX: "false"
-featureY: "false"
+featureY: "true"
