@@ -11,7 +11,7 @@ app = FastAPI(title="supplier-onboarding")
 # supplier_code -> capabilities that supplier supports.
 # AIR1 is a fictional airline, HOTEL1 is a fictional hotel chain, and CAR1 is
 # a fictional car rental. AIR1 and HOTEL1 support SEARCH, BOOK, and CANCEL.
-# CAR1 supports SEARCH and BOOK. No supplier supports ANCILLARIES.
+# CAR1 supports SEARCH and BOOK. No supplier supports UPGRADE_BIDDING.
 SUPPLIER_CAPABILITIES = {
     "AIR1": {"SEARCH", "BOOK", "CANCEL"},
     "HOTEL1": {"SEARCH", "BOOK", "CANCEL"},

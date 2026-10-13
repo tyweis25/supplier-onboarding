@@ -22,9 +22,9 @@ SUPPORTED = [
 ]
 
 UNSUPPORTED = [
-    ("AIR1", "ANCILLARIES"),
-    ("HOTEL1", "ANCILLARIES"),
-    ("CAR1", "ANCILLARIES"),
+    ("AIR1", "UPGRADE_BIDDING"),
+    ("HOTEL1", "UPGRADE_BIDDING"),
+    ("CAR1", "UPGRADE_BIDDING"),
     ("CAR1", "CANCEL"),
 ]
 

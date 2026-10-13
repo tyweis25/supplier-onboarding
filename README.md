@@ -5,7 +5,7 @@ Small FastAPI service that checks whether an onboarded supplier supports a capab
 A request is approved when both are true:
 
 - `supplier_code` is onboarded (`AIR1` airline, `HOTEL1` hotel chain, `CAR1` car rental)
-- `capability` is supported for that supplier (`SEARCH`, `BOOK`, and `CANCEL` for `AIR1` and `HOTEL1`; `SEARCH` and `BOOK` for `CAR1`; no supplier supports `ANCILLARIES`)
+- `capability` is supported for that supplier (`SEARCH`, `BOOK`, and `CANCEL` for `AIR1` and `HOTEL1`; `SEARCH` and `BOOK` for `CAR1`; no supplier supports `UPGRADE_BIDDING`)
 
 ## Run locally
 
