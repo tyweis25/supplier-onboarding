@@ -14,6 +14,7 @@ SUPPORTED = [
     ("AIR1", "SEARCH"),
     ("AIR1", "BOOK"),
     ("AIR1", "CANCEL"),
+    ("AIR1", "UPGRADE_BIDDING"),
     ("HOTEL1", "SEARCH"),
     ("HOTEL1", "BOOK"),
     ("HOTEL1", "CANCEL"),
@@ -22,7 +23,6 @@ SUPPORTED = [
 ]
 
 UNSUPPORTED = [
-    ("AIR1", "UPGRADE_BIDDING"),
     ("HOTEL1", "UPGRADE_BIDDING"),
     ("CAR1", "UPGRADE_BIDDING"),
     ("CAR1", "CANCEL"),
@@ -78,6 +78,34 @@ def test_approved_when_supplier_supports_capability(supplier_code, capability):
             f"Capability {capability} is supported for supplier {supplier_code}"
         ),
     }
+
+
+def test_upgrade_bidding_approved_for_air_supplier():
+    response = client.post(
+        "/onboarding/check",
+        json={"supplier_code": "AIR1", "capability": "UPGRADE_BIDDING"},
+    )
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "approved": True,
+        "reason": "Capability UPGRADE_BIDDING is supported for supplier AIR1",
+    }
+
+
+def test_upgrade_bidding_not_approved_for_hotel_and_car_suppliers():
+    for supplier_code in ("HOTEL1", "CAR1"):
+        response = client.post(
+            "/onboarding/check",
+            json={"supplier_code": supplier_code, "capability": "UPGRADE_BIDDING"},
+        )
+
+        assert response.status_code == 200
+        body = response.json()
+        assert body["approved"] is False
+        assert body["reason"] == (
+            f"Capability UPGRADE_BIDDING is not supported for supplier {supplier_code}"
+        )
 
 
 def test_not_approved_when_supplier_is_unknown():
