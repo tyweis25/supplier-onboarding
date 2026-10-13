@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supplier-onboarding
+  labels:
+    app: supplier-onboarding
+spec:
+  replicas: {{.Values.replicas}}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: supplier-onboarding
+  template:
+    metadata:
+      labels:
+        app: supplier-onboarding
+    spec:
+      containers:
+        - name: supplier-onboarding
+          image: {{.Values.image}}
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: FEATURE_X
+              value: "{{.Values.featureX}}"
+            - name: FEATURE_Y
+              value: "{{.Values.featureY}}"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

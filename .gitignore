@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Never commit delegate credentials or the Harness sample repo
+harness-delegate.yml
+harnesscd-example-apps/
